@@ -1,65 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --background: #0a0a0f;
   --foreground: #ffffff;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
-@layer utilities {
-  .glass {
-    @apply bg-white/10 backdrop-blur-xl border border-white/20;
-  }
-  
-  .glass-dark {
-    @apply bg-black/20 backdrop-blur-xl border border-white/10;
-  }
-  
-  .glow-primary {
-    box-shadow: 0 0 30px rgba(109, 31, 224, 0.4);
-  }
-  
-  .glow-teal {
-    box-shadow: 0 0 30px rgba(34, 201, 151, 0.4);
-  }
-  
-  .mesh-gradient {
-    background: 
-      radial-gradient(at 27% 37%, hsla(265, 78%, 50%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 97% 21%, hsla(173, 68%, 46%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 52% 99%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 10% 29%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 97% 96%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 33% 50%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 79% 53%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%);
-    animation: mesh-move 20s ease infinite;
-  }
-  
-  @keyframes mesh-move {
-    0%, 100% { 
-      background-position: 0% 50%, 100% 50%, 50% 100%, 0% 50%, 100% 100%, 50% 0%, 100% 50%;
-    }
-    50% { 
-      background-position: 100% 50%, 0% 50%, 50% 0%, 100% 50%, 0% 0%, 50% 100%, 0% 50%;
-    }
-  }
-  
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-  .transform-3d {
-    transform-style: preserve-3d;
-  }
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-primary {
+  box-shadow: 0 0 30px rgba(109, 31, 224, 0.4);
+}
+
+.glow-teal {
+  box-shadow: 0 0 30px rgba(34, 201, 151, 0.4);
+}
+
+/* Mesh gradient */
+.mesh-gradient {
+  background: 
+    radial-gradient(at 27% 37%, hsla(265, 78%, 50%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 97% 21%, hsla(173, 68%, 46%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%);
+  animation: mesh-move 20s ease infinite;
+}
+
+@keyframes mesh-move {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0.8; }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes glow-pulse {
+  0%   { box-shadow: 0 0 20px rgba(109, 31, 224, 0.5); }
+  100% { box-shadow: 0 0 30px rgba(109, 31, 224, 0.8); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite;
+  background-size: 200% 100%;
+}
+
+/* 3D transform */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
 }
