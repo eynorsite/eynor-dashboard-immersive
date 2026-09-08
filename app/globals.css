@@ -1,26 +1,65 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 30px rgba(109, 31, 224, 0.4);
+  }
+  
+  .glow-teal {
+    box-shadow: 0 0 30px rgba(34, 201, 151, 0.4);
+  }
+  
+  .mesh-gradient {
+    background: 
+      radial-gradient(at 27% 37%, hsla(265, 78%, 50%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 97% 21%, hsla(173, 68%, 46%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 10% 29%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 97% 96%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 33% 50%, hsla(173, 68%, 46%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 79% 53%, hsla(265, 78%, 50%, 0.2) 0px, transparent 50%);
+    animation: mesh-move 20s ease infinite;
+  }
+  
+  @keyframes mesh-move {
+    0%, 100% { 
+      background-position: 0% 50%, 100% 50%, 50% 100%, 0% 50%, 100% 100%, 50% 0%, 100% 50%;
+    }
+    50% { 
+      background-position: 100% 50%, 0% 50%, 50% 0%, 100% 50%, 0% 0%, 50% 100%, 0% 50%;
+    }
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
 }
